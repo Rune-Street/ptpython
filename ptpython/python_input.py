@@ -4,6 +4,7 @@ This can be used for creation of Python REPLs.
 """
 import __future__
 
+from ast import PyCF_ALLOW_TOP_LEVEL_AWAIT
 from asyncio import get_event_loop
 from functools import partial
 from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar
@@ -359,7 +360,7 @@ class PythonInput:
         in the globals.
         """
         flags = 0
-
+        flags |= PyCF_ALLOW_TOP_LEVEL_AWAIT
         for value in self.get_globals().values():
             if isinstance(value, __future__._Feature):
                 flags |= value.compiler_flag
