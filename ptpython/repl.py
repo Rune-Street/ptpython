@@ -15,7 +15,7 @@ import sys
 import traceback
 import warnings
 from ast import PyCF_ALLOW_TOP_LEVEL_AWAIT
-from typing import Any, Callable, ContextManager, Dict, Optional
+from typing import Any, Callable, ContextManager, Coroutine, Dict, Optional
 
 from prompt_toolkit.document import Document
 from prompt_toolkit.formatted_text import (
@@ -423,7 +423,7 @@ def embed(
     startup_paths=None,
     patch_stdout: bool = False,
     return_asyncio_coroutine: bool = False,
-) -> None:
+) -> Optional[Coroutine]:
     """
     Call this to embed  Python shell at the current point in your program.
     It's similar to `IPython.embed` and `bpython.embed`. ::
